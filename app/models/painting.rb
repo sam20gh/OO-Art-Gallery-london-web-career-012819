@@ -4,15 +4,20 @@ class Painting
 
   @@all = []
 
-  def initialize(name, city, gallery, artist)
+  def initialize(name, price, gallery, artist)
     @name = name
-    @city = city
+    @price = price
     @gallery = gallery
     @artist = artist
     @@all << self
   end 
   def self.all 
     @@all
+  end
+
+  def self.total_price
+    total = @@all.map {|painting| painting.price}
+    total.inject(:+)
   end
 
  
