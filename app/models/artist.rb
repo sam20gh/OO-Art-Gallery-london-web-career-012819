@@ -1,6 +1,7 @@
 class Artist
 
-  attr_accessor :name, :years_experience
+
+ attr_accessor :name, :years_experience
 
   @@all = []
 
@@ -9,42 +10,37 @@ class Artist
     @years_experience = years_experience
     @@all << self
   end
+ def self.all
+  @@all
+ end
+ def create_painting(title, price, gallery)
+  Painting.new(title, price, gallery, self)
+ end
 
-  def self.all
-    @@all
-  end
+ def paintings
+   Painting.all.select {|x| x.artist == self}
+ end
+ def galleries
+  paintings.map {|x| x.gallery}
+ end
+ def cities
+  paitings.map {|x| x.city}
+ end
 
-  def create_painting(title, price, gallery)
-    Painting.new(title, price, gallery, self)
-  end
+ def self.total_experience
+  years = @@all.map {|artist| artist.years_experience}
+  years.inject(:+)
+ end
 
+ def painting_per_year
+  paintings.count.to_f / @years_experience.to_f
+ end
 
-  def paintings
-    Painting.all.select {|ele| ele.artist == self}
-  end
+ def self.most_prolific
 
-  def galleries
-    paintings.map {|ele| ele.gallery}
-  end
-
-  def cities
-    galleries.map {|ele| ele.city}
-  end
-
-  def self.total_experience
-    a = @@all.map {|ele| ele.years_experience}
-    a.inject(:+)
-  end
-
-  def paintings_per_year
-    paintings.count.to_f / @years_experience.to_f
-  end
-
-  def most_prolific
-    @@all.max_by {|x| x.paintings_per_year}
-  end
+ end
 
 
-
+ 
 
 end
