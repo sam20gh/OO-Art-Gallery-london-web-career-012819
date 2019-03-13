@@ -38,7 +38,7 @@ class Artist
 
  def self.most_prolific
    most = @@all.max_by {|x| x.painting_per_year}
-  #  puts "#{most.name} with #{painting_per_year} per year of experience"
+   puts "#{most.name} with #{most.painting_per_year} per year of experience"
  end
 
 

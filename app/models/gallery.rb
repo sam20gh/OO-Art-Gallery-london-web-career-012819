@@ -12,5 +12,11 @@ class Gallery
   def self.all 
     @@all
   end
+  def paintings
+    Painting.all.select {|paintings| paintings.gallery == self}
+  end
+  def artists
+    paintings.map {|painting| painting.artist.name}
+  end
 
 end
